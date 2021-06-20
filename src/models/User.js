@@ -8,7 +8,10 @@ const User = db.define('user', {
         primaryKey: true
       },
     email: Sequelize.STRING,
-    password: Sequelize.STRING
+    password: Sequelize.STRING,
+    name: Sequelize.STRING,
+    deviceId: Sequelize.STRING,
+    soundLevel: Sequelize.STRING, 
 })
 
 // User.sync({force: true})

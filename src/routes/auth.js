@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
         res.status(200).json(users)
     } catch (err) {
         console.error(err)
-        res.status(500).send('An error occured')
+        return res.status(500).send('An error occured')
     }
 })
 
@@ -26,9 +26,9 @@ router.post('/login', async (req, res) => {
         if (q && await bcrypt.compare(req.body.password, q.password)) {
             // correct details, login
             const token = genToken({ user: q })
-            res.status(200).json({ resp_code: '200', resp_desc: "Login successful", token })
+            return res.status(200).json({ resp_code: '200', resp_desc: "Login successful", token })
         } else {
-            res.status(404).json({ resp_code: '403', resp_desc: "Incorrect Email or Password" })
+            return res.status(404).json({ resp_code: '403', resp_desc: "Incorrect Email or Password" })
         }
 
     } catch (err) {
@@ -49,9 +49,13 @@ router.post('/register', async (req, res) => {
             const hashedPassword = await bcrypt.hash(req.body.password, 10)
             const user = new User({
                 email: req.body.email,
-                password: hashedPassword
+                password: hashedPassword,
+                name: req.body.name,
+                deviceId: req.body.deviceId,
+                soundLevel: '0'
             })
             user.save()
+            console.log(user)
             const token = genToken({ user: q })
             res.status(200).json({ resp_code: '200', resp_desc: "Account created successful", token })
         }
@@ -60,6 +64,30 @@ router.post('/register', async (req, res) => {
         res.status(500).send("An error occured")
     }
 
+})
+
+// update user soundLevel
+router.put('/update-sound-level', async(req, res, next) => {
+    const { id, soundLevel } = req.body // NB: id is device id
+    console.log(soundLevel)
+
+    try {
+        // find user who's device id is equal to id
+        const user = await User.findOne({ where: { deviceId: id } })
+
+        if (user) {
+            user.soundLevel = soundLevel
+            await user.save()
+
+            // emit socket
+            req.io.emit('receive_data', soundLevel)
+            return res.status(200).json(user)
+        }
+
+    } catch (err) {
+        console.error(err)
+        res.status(500).send("An error occured")
+    }
 })
 
 export default router
