@@ -7,7 +7,7 @@ import session from 'express-session'
 import socketio from 'socket.io'
 
 import 'dotenv/config'
-import db from './utils/db';
+import db from './utils/db'; 
 
 // routes
 import authRouter from './routes/auth'
@@ -23,7 +23,7 @@ db.authenticate()
 
 // middlewares
 app.use((req, res, next) => {
-    req.io = io
+    req.io = io 
     next()
 })
 app.use(express.json());

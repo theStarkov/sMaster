@@ -24,7 +24,9 @@
     "sequelize": "^6.6.2",
     "socket.io": "^2.4.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
   "scripts": {
     "start": "nodemon ./src/server.js --exec babel-node -e js",
     "test": "echo \"Error: no test specified\" && exit 1"
