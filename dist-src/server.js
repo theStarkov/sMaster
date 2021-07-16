@@ -1,7 +1,5 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _express = _interopRequireDefault(require("express"));
 
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
@@ -21,6 +19,8 @@ require("dotenv/config");
 var _db = _interopRequireDefault(require("./utils/db"));
 
 var _auth = _interopRequireDefault(require("./routes/auth"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 // routes
 var app = (0, _express["default"])();
