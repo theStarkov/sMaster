@@ -18,7 +18,7 @@ const port = process.env.PORT
 
 // test db connection
 db.authenticate()
-    .then(() => console.log('DB connected successfully'))
+    .then(() => console.log(`DB connected successfully......`))
     .catch(err => console.log(err))
 
 // middlewares

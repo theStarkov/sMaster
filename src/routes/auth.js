@@ -2,6 +2,7 @@ import { Router } from "express"
 import { genToken } from "../jwtAuth/jwToken"
 import User from "../models/User"
 import bcrypt from 'bcrypt'
+import 'regenerator-runtime/runtime'
 
 const router = Router()
 
