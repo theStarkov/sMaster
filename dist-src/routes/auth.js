@@ -1,9 +1,13 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _express = require("express");
 
@@ -13,20 +17,14 @@ var _User = _interopRequireDefault(require("../models/User"));
 
 var _bcrypt = _interopRequireDefault(require("bcrypt"));
 
-require("regenerator-runtime/runtime");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+var _runtime = _interopRequireDefault(require("regenerator-runtime/runtime"));
 
 var router = (0, _express.Router)(); // test api request
 
 router.get('/', /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req, res) {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_runtime["default"].mark(function _callee(req, res) {
     var users;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
+    return _runtime["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -60,9 +58,9 @@ router.get('/', /*#__PURE__*/function () {
 }()); // login 
 
 router.post('/login', /*#__PURE__*/function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(req, res) {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_runtime["default"].mark(function _callee2(req, res) {
     var q, token;
-    return regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _runtime["default"].wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -135,9 +133,9 @@ router.post('/login', /*#__PURE__*/function () {
 }()); // register
 
 router.post('/register', /*#__PURE__*/function () {
-  var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(req, res) {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_runtime["default"].mark(function _callee3(req, res) {
     var q, hashedPassword, user, token;
-    return regeneratorRuntime.wrap(function _callee3$(_context3) {
+    return _runtime["default"].wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
@@ -212,10 +210,10 @@ router.post('/register', /*#__PURE__*/function () {
 }()); // update user soundLevel
 
 router.put('/update-sound-level', /*#__PURE__*/function () {
-  var _ref4 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(req, res, next) {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_runtime["default"].mark(function _callee4(req, res, next) {
     var _req$body, id, soundLevel, user;
 
-    return regeneratorRuntime.wrap(function _callee4$(_context4) {
+    return _runtime["default"].wrap(function _callee4$(_context4) {
       while (1) {
         switch (_context4.prev = _context4.next) {
           case 0:
