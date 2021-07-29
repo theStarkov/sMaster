@@ -27,7 +27,7 @@ router.post('/login', async (req, res) => {
         if (q && await bcrypt.compare(req.body.password, q.password)) {
             // correct details, login
             const token = genToken({ user: q })
-            return res.status(200).json({ resp_code: '200', resp_desc: "Login successful", token })
+            return res.status(200).json({ resp_code: '200', resp_desc: "Login successful", token, user: q })
         } else {
             return res.status(404).json({ resp_code: '403', resp_desc: "Incorrect Email or Password" })
         }
