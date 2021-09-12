@@ -79,9 +79,10 @@ router.put('/update-sound-level', async(req, res, next) => {
         if (user) {
             user.soundLevel = soundLevel
             await user.save()
-
+            
+            const data = {soundLevel}
             // emit socket
-            req.io.emit('receive_data', soundLevel)
+            req.io.emit('receive_data', data)
             return res.status(200).json(user)
         }
 
