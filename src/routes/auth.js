@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
         // check if user already exists
         if (q) { res.status(404).json({ resp_code: '403', resp_desc: "Account already exists" }) }
         else {
-            if(!findDevice){res.status(404).json({ resp_code: '430', resp_desc:"Device does not exist"}) }
+            if(!findDevice){res.status(401).json({ resp_code: '430', resp_desc:"Device does not exist"}) }
             else{
                 if(findDevice.activated!=true){
                return res.status(404).json({resp_code: '403', resp_desc:"Device ID invalid"}) 
