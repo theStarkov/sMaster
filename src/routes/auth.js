@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { genToken } from "../jwtAuth/jwToken"
-import User from "../models/User"
+import {User, Device} from "../models/User"
+
 import bcrypt from 'bcrypt'
 import regeneratorRuntime from 'regenerator-runtime/runtime'
 
@@ -43,12 +44,21 @@ router.post('/register', async (req, res) => {
     try {
         // check if user exists
         const q = await User.findOne({ where: { email: req.body.email } })
+    
+        const findDevice = await Device.findOne({where: {deviceId: req.body.deviceId}})
+        if(!findDevice){}
 
         // check if user already exists
         if (q) { res.status(404).json({ resp_code: '403', resp_desc: "Account already exists" }) }
         else {
-            const hashedPassword = await bcrypt.hash(req.body.password, 10)
-            const user = new User({
+            if(!findDevice){res.status(404).json({ resp_code: '430', resp_desc:"Device does not exist"}) }
+            else{
+                if(findDevice.activated!=true){
+               return res.status(404).json({resp_code: '403', resp_desc:"Device ID invalid"}) 
+            }
+            else{
+                const hashedPassword = await bcrypt.hash(req.body.password, 10)
+                const user = new User({
                 email: req.body.email,
                 password: hashedPassword,
                 name: req.body.name,
@@ -59,6 +69,8 @@ router.post('/register', async (req, res) => {
             console.log(user)
             const token = genToken({ user: q })
             res.status(200).json({ resp_code: '200', resp_desc: "Account created successful", token })
+            }
+            }
         }
     } catch (err) {
         console.error(err)
@@ -89,6 +101,19 @@ router.put('/update-sound-level', async(req, res, next) => {
     } catch (err) {
         console.error(err)
         res.status(500).send("An error occured")
+    }
+})
+
+router.post('/addDevice', async(req,res)=>{
+    const findDevice = await Device.findOne({where: {deviceId: req.body.deviceId}})
+    if(findDevice){ return res.status(404).json({ resp_code: '403', resp_desc: "Device already exist" })}
+    else{
+         const device = new Device({
+                deviceId: req.body.deviceId,
+                activated: true
+            })
+            device.save()
+            return res.status(200).json(device)
     }
 })
 

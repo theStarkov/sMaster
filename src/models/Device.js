@@ -12,7 +12,7 @@ const Device = db.define('device', {
    
 })
 
-Device.sync({alter: true})
-    .then(() => console.log('Device table created....'))
+// Device.sync({alter: true}) 
+//     .then(() => console.log('Device table created....')) 
 
 export default Device 

@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import db from '../utils/db'
 
-const User = db.define('user', {
+export const User = db.define('user', {
     uuid: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -17,4 +17,15 @@ const User = db.define('user', {
 // User.sync({force: true})
 //     .then(() => console.log('User table created'))
 
-export default User
+export const Device = db.define('device', {
+    deviceId: {type: Sequelize.STRING,
+              primaryKey:true,
+    },
+    activated: {type: Sequelize.BOOLEAN},
+   
+})
+
+// Device.sync({alter: true}) 
+//     .then(() => console.log('Device table created....')) 
+
+//export default User 
