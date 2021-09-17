@@ -46,7 +46,7 @@ router.post('/register', async (req, res) => {
         const q = await User.findOne({ where: { email: req.body.email } })
     
         const findDevice = await Device.findOne({where: {deviceId: req.body.deviceId}})
-        if(!findDevice){}
+       
 
         // check if user already exists
         if (q) { res.status(404).json({ resp_code: '403', resp_desc: "Account already exists" }) }
